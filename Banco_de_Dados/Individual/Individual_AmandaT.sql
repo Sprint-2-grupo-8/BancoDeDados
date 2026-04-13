@@ -9,7 +9,7 @@ telefone CHAR(11),
 senha VARCHAR(60) 
 );
 
-CREATE TABLE cargo(
+CREATE TABLE Permissaocargo(
 idCargo INT PRIMARY KEY AUTO_INCREMENT,
 Cargo VARCHAR(45)
 );
