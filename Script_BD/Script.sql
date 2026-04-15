@@ -14,7 +14,7 @@ CREATE TABLE Setor (
 );
 
 CREATE TABLE funcionario (
-    idfuncionario INT AUTO_INCREMENT,
+    idfuncionario INT PRIMARY KEY AUTO_INCREMENT,
     fkEmpresa INT,
     nome VARCHAR(45),
     cpf CHAR(11),
@@ -22,7 +22,6 @@ CREATE TABLE funcionario (
     email VARCHAR(220),
     senha VARCHAR(255),
     fkSetor INT,
-    PRIMARY KEY (idfuncionario , fkSupervisor),
     CONSTRAINT cFkEmpresa FOREIGN KEY (fkEmpresa)
         REFERENCES empresa (idempresa),
     CONSTRAINT cFkSupervisor FOREIGN KEY (fkSupervisor)
