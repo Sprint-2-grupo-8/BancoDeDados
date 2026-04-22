@@ -1,3 +1,5 @@
+CREATE DATABASE PI;
+USE PI;
 
 CREATE TABLE empresa (
     idempresa INT PRIMARY KEY AUTO_INCREMENT,
@@ -8,9 +10,11 @@ CREATE TABLE empresa (
     senha VARCHAR(255)
 );
 
-CREATE TABLE Setor (
+CREATE TABLE setor (
     idSetor INT PRIMARY KEY AUTO_INCREMENT,
-    identificador VARCHAR(45)
+    identificador VARCHAR(45),
+    gasMinimo INT,
+    gasMaximo INT
 );
 
 CREATE TABLE funcionario (
@@ -22,42 +26,56 @@ CREATE TABLE funcionario (
     email VARCHAR(220),
     senha VARCHAR(255),
     fkSetor INT,
-    CONSTRAINT cFkEmpresa FOREIGN KEY (fkEmpresa)
+    CONSTRAINT cFkEmpresa_func FOREIGN KEY (fkEmpresa)
         REFERENCES empresa (idempresa),
     CONSTRAINT cFkSupervisor FOREIGN KEY (fkSupervisor)
-        REFERENCES mydb.funcionario (idfuncionario),
-    CONSTRAINT FkSetor FOREIGN KEY (fkSetor)
-        REFERENCES mydb.Setor (idSetor)
+        REFERENCES funcionario (idfuncionario),
+    CONSTRAINT cFkSetor_func FOREIGN KEY (fkSetor)
+        REFERENCES setor (idSetor)
 );
 
 CREATE TABLE estufa (
     idestufa INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45) NOT NULL,
     fkEmpresa INT,
-    gasMinimo INT,
-    gasMaximo INT,
     fkSetor INT,
-    CONSTRAINT cFkEmpresa FOREIGN KEY (fkEmpresa)
+    CONSTRAINT cFkEmpresa_estuf FOREIGN KEY (fkEmpresa)
         REFERENCES empresa (idempresa),
-    CONSTRAINT cFkSetor FOREIGN KEY (fkSetor)
-        REFERENCES Setor (idSetor)
+    CONSTRAINT cFkSetor_estuf FOREIGN KEY (fkSetor)
+        REFERENCES setor (idSetor)
 );
 
 CREATE TABLE sensor (
     idSensor INT PRIMARY KEY AUTO_INCREMENT,
-    fabricante VARCHAR(45),
+    modelo VARCHAR(45),
     dtInstalacao DATE,
-    status VARCHAR(45),
+    sensor_status VARCHAR(45),
     fkEstufa INT,
     CONSTRAINT cFkEstufa FOREIGN KEY (fkEstufa)
-        REFERENCES estufa (idestufa)
+        REFERENCES estufa (idestufa),
+    CONSTRAINT cStatus CHECK (sensor_status IN ('Ativo' , 'Inativo'))
 );
 
-CREATE TABLE Registro (
+CREATE TABLE registro (
     idRegistro INT PRIMARY KEY AUTO_INCREMENT,
     fkSensor INT,
-    gas INT,
-    horario DATETIME,
+    PPM float,
+    dtHrRegistro DATETIME DEFAULT (NOW()),
     CONSTRAINT cFkSensor FOREIGN KEY (fkSensor)
         REFERENCES sensor (idSensor)
 );
+
+INSERT INTO empresa (nome, cnpj, telefone, emailCorporativo, senha) VALUES
+('Red Berry Company', '45083604000187', '11975519892', 'redberrycompanyy@gmail.com', 'RB_C6ompany@fru74');
+
+INSERT INTO setor (identificador, gasMinimo, gasMaximo) VALUES
+('Setor 1A RBC', 600, 900);
+
+INSERT INTO funcionario (fkEmpresa, nome, cpf, fkSupervisor, email, senha, fkSetor) VALUES
+(1, 'Arthur Lima Azevedo', 96255467802, 1, 'arthur.lazev@redberry.com.br', 'l4am0Pr@_01', 1);
+
+INSERT INTO estufa (nome, fkEmpresa, fkSetor) VALUES
+('Estufa M01', 1, 1);
+
+INSERT INTO sensor (modelo, dtInstalacao, sensor_status, fkEstufa) VALUES
+('Arduino MQ-2 UNO', '2026-04-22', 'Ativo', 1);
