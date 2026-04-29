@@ -12,9 +12,7 @@ CREATE TABLE empresa (
 
 CREATE TABLE setor (
     idSetor INT PRIMARY KEY AUTO_INCREMENT,
-    identificador VARCHAR(45),
-    gasMinimo INT,
-    gasMaximo INT
+    identificador VARCHAR(45)
 );
 
 CREATE TABLE funcionario (
@@ -37,6 +35,8 @@ CREATE TABLE funcionario (
 CREATE TABLE estufa (
     idestufa INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45) NOT NULL,
+    gasMinimo INT,
+    gasMaximo INT,
     fkEmpresa INT,
     fkSetor INT,
     CONSTRAINT cFkEmpresa_estuf FOREIGN KEY (fkEmpresa)
