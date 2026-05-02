@@ -20,16 +20,15 @@ CREATE TABLE funcionario (
     fkEmpresa INT,
     nome VARCHAR(45),
     cpf CHAR(11),
-    fkSupervisor INT,
     email VARCHAR(220),
     senha VARCHAR(255),
     fkSetor INT,
     CONSTRAINT cFkEmpresa_func FOREIGN KEY (fkEmpresa)
         REFERENCES empresa (idempresa),
-    CONSTRAINT cFkSupervisor FOREIGN KEY (fkSupervisor)
-        REFERENCES funcionario (idfuncionario),
     CONSTRAINT cFkSetor_func FOREIGN KEY (fkSetor)
-        REFERENCES setor (idSetor)
+        REFERENCES setor (idSetor),
+	cargo VARCHAR(45),
+    CONSTRAINT ckcargo CHECK (cargo IN('Funcionario Comum', 'Administrador', 'Supervisor'))
 );
 
 CREATE TABLE estufa (
@@ -68,14 +67,14 @@ CREATE TABLE registro (
 INSERT INTO empresa (nome, cnpj, telefone, emailCorporativo, senha) VALUES
 ('Red Berry Company', '45083604000187', '11975519892', 'redberrycompanyy@gmail.com', 'RB_C6ompany@fru74');
 
-INSERT INTO setor (identificador, gasMinimo, gasMaximo) VALUES
-('Setor 1A RBC', 600, 900);
+INSERT INTO setor (identificador) VALUES
+('Setor 1A RBC');
 
-INSERT INTO funcionario (fkEmpresa, nome, cpf, fkSupervisor, email, senha, fkSetor) VALUES
-(1, 'Arthur Lima Azevedo', 96255467802, 1, 'arthur.lazev@redberry.com.br', 'l4am0Pr@_01', 1);
+INSERT INTO funcionario (fkEmpresa, nome, cpf, email, senha, fkSetor, cargo) VALUES
+(1, 'Arthur Lima Azevedo', 96255467802,'arthur.lazev@redberry.com.br', 'l4am0Pr@_01', 1, 'Supervisor');
 
-INSERT INTO estufa (nome, fkEmpresa, fkSetor) VALUES
-('Estufa M01', 1, 1);
+INSERT INTO estufa (nome, fkEmpresa, fkSetor, gasMinimo, gasMaximo) VALUES
+('Estufa M01', 1, 1, 300, 900);
 
 INSERT INTO sensor (modelo, dtInstalacao, sensor_status, fkEstufa) VALUES
 ('Arduino MQ-2 UNO', '2026-04-22', 'Ativo', 1);
