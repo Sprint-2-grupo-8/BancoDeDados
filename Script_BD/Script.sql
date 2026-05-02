@@ -6,8 +6,7 @@ CREATE TABLE empresa (
     nome VARCHAR(45),
     cnpj CHAR(14) NOT NULL,
     telefone VARCHAR(20),
-    emailCorporativo VARCHAR(220),
-    senha VARCHAR(255)
+    emailCorporativo VARCHAR(220)
 );
 
 CREATE TABLE setor (
