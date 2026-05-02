@@ -28,7 +28,7 @@ CREATE TABLE funcionario (
     CONSTRAINT cFkSetor_func FOREIGN KEY (fkSetor)
         REFERENCES setor (idSetor),
 	cargo VARCHAR(45),
-    CONSTRAINT ckcargo CHECK (cargo IN('Funcionario Comum', 'Administrador', 'Supervisor'))
+    CONSTRAINT ckcargo CHECK (cargo IN('Funcionario Comum', 'Administrador'))
 );
 
 CREATE TABLE estufa (
@@ -71,10 +71,11 @@ INSERT INTO setor (identificador) VALUES
 ('Setor 1A RBC');
 
 INSERT INTO funcionario (fkEmpresa, nome, cpf, email, senha, fkSetor, cargo) VALUES
-(1, 'Arthur Lima Azevedo', 96255467802,'arthur.lazev@redberry.com.br', 'l4am0Pr@_01', 1, 'Supervisor');
+(1, 'Arthur Lima Azevedo', 96255467802,'arthur.lazev@redberry.com.br', 'l4am0Pr@_01', 1, 'Administrador');
 
 INSERT INTO estufa (nome, fkEmpresa, fkSetor, gasMinimo, gasMaximo) VALUES
 ('Estufa M01', 1, 1, 300, 900);
 
 INSERT INTO sensor (modelo, dtInstalacao, sensor_status, fkEstufa) VALUES
 ('Arduino MQ-2 UNO', '2026-04-22', 'Ativo', 1);
+
