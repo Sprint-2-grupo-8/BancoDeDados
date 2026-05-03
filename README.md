@@ -16,7 +16,7 @@ Vai ter o banco de dados individual de cada membro da equipe com as suas ideias 
 A modelagem do banco está neste repositório
 No total tem 6 tabelas na modelagem, que são <b>empresa, funcionario, setor, estufa, sensor e registro</b>, todos tendo id que auto incrementa
 <br><br>
-<img width="830" height="540" alt="image" src="https://github.com/user-attachments/assets/c0dd5b00-79b8-4e89-9cbc-f708215feca0" />
+<img width="708" height="540" alt="image" src="https://github.com/user-attachments/assets/5e953054-aa20-44a9-9669-930966c9179a" />
 
 
 
