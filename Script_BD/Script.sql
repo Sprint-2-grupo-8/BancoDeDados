@@ -27,7 +27,7 @@ CREATE TABLE funcionario (
     CONSTRAINT cFkSetor_func FOREIGN KEY (fkSetor)
         REFERENCES setor (idSetor),
 	cargo VARCHAR(45),
-    CONSTRAINT ckcargo CHECK (cargo IN('Funcionario Comum', 'Administrador'))
+    CONSTRAINT ckcargo CHECK (cargo IN('Funcionário Comum', 'Administrador'))
 );
 
 CREATE TABLE estufa (
@@ -63,18 +63,43 @@ CREATE TABLE registro (
         REFERENCES sensor (idSensor)
 );
 
-INSERT INTO empresa (nome, cnpj, telefone, emailCorporativo, senha) VALUES
-('Red Berry Company', '45083604000187', '11975519892', 'redberrycompanyy@gmail.com', 'RB_C6ompany@fru74');
+INSERT INTO empresa (nome, cnpj, telefone, emailCorporativo) VALUES
+('Red Berry Company', '45083604000187', '11975519892', 'redberrycompanyy@gmail.com'),
+('Berry House', '12345678000199', '11988887777', 'contato@berryhouse.com.br');
 
 INSERT INTO setor (identificador) VALUES
-('Setor 1A RBC');
+('Setor 1A RBC'),
+('Setor 1B RBC'),
+('Setor AA BH'),
+('Setor AB BH');
 
 INSERT INTO funcionario (fkEmpresa, nome, cpf, email, senha, fkSetor, cargo) VALUES
-(1, 'Arthur Lima Azevedo', 96255467802,'arthur.lazev@redberry.com.br', 'l4am0Pr@_01', 1, 'Administrador');
+(1, 'Arthur Lima Azevedo', 96255467802,'arthur.lazev@redberry.com.br', 'l4am0Pr@_01', 1, 'Administrador'),
+(1, 'Lucas Pereira Silva', '12345678901', 'lucas.silva@redberry.com.br', 'luc@S123', 2, 'Funcionário Comum'),
+(2, 'Mariana Costa Souza', '23456789012', 'mariana.souza@redberry.com.br', 'mar!2026', 3, 'Funcionário Comum'),
+(2, 'Carlos Eduardo Lima', '34567890123', 'carlos.lima@redberry.com.br', 'carl0s#adm', 4, 'Administrador');
+
 
 INSERT INTO estufa (nome, fkEmpresa, fkSetor, gasMinimo, gasMaximo) VALUES
-('Estufa M01', 1, 1, 300, 900);
+('Estufa M01', 1, 1, 300, 900),
+('Estufa M02', 1, 2, 350, 850),
+('Estufa M03', 1, 2, 400, 800),
+('Estufa H01', 2, 1, 300, 900),
+('Estufa H01', 2, 2, 450, 850),
+('Estufa H01', 2, 1, 390, 880);
 
 INSERT INTO sensor (modelo, dtInstalacao, sensor_status, fkEstufa) VALUES
-('Arduino MQ-2 UNO', '2026-04-22', 'Ativo', 1);
+('Arduino MQ-2 UNO', '2026-04-22', 'Ativo', 1),
+('Arduino MQ-2 UNO', '2026-04-22', 'Ativo', 1),
+('Arduino MQ-2 UNO', '2026-04-23', 'Ativo', 2),
+('Arduino MQ-2 UNO', '2026-04-23', 'Ativo', 2),
+('Arduino MQ-2 UNO', '2026-04-24', 'Ativo', 3),
+('Arduino MQ-2 UNO', '2026-04-24', 'Ativo', 3),
+('Arduino MQ-2 UNO', '2026-04-25', 'Inativo', 4),
+('Arduino MQ-2 UNO', '2026-04-25', 'Ativo', 4),
+('Arduino MQ-2 UNO', '2026-04-26', 'Ativo', 5),
+('Arduino MQ-2 UNO', '2026-04-26', 'Ativo', 5),
+('Arduino MQ-2 UNO', '2026-04-27', 'Inativo', 6),
+('Arduino MQ-2 UNO', '2026-04-27', 'Inativo', 6);
+
 
